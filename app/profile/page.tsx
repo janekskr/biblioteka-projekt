@@ -2,26 +2,44 @@
 
 import { libraryInstance } from "@/lib/api";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function ProfilePage() {
-  console.log(libraryInstance.readers);
   return (
-    <div className="mt-[100px] text-black px-24 gap-20 flex-col flex">
-      {libraryInstance.readers.map((x) => (
-        <div key={x.id} className="rounded-[40px] bg-cyan-100">
-          {/* <Image src="/profile.png" width={50} height={50} alt="Zdjęcie profilowe" /> */}
-          <p className="text-center">Imię: {x.firstName}</p>
-          <p className="text-center">Nazwisko: {x.lastName}</p>
-          <p className="text-center">Wiek: {x.age}</p>
-          <p className="text-center">
-            Wypożyczone książki:{" "}
-            {x.borrowedBooks.length > 0
-              ? x.borrowedBooks.map((x) => x.title + ", ")
-              : "Brak wypożyczonych książek"}
-          </p>
-        </div>
-      ))}
+    <div className="mt-[170px] text-black px-24 w-full self-start">
+      <h1 className="text-3xl font-bold mb-[60px]">Lista użytkowników:</h1>
+      <div className="grid grid-cols-2 gap-[50px]">
+        {libraryInstance.readers.map((x) => (
+          <div
+            key={x.id}
+            className="rounded-[40px] flex gap-[50px] bg-slate-100 p-[40px] overflow-hidden items-center shadow-md"
+          >
+            <Image
+              src="/profile.png"
+              alt="zdjęcie profilowe"
+              width={150}
+              height={150}
+              className="rounded-full aspect-square"
+            />
+            <div className="gap-[10px] flex flex-col">
+              <p className="text-2xl font-bold">
+                {x.firstName} {x.lastName}
+              </p>
+              <p className="text-xl font-medium">{x.age} lat</p>
+              <div className="flex gap-[20px] mt-[7px]">
+                {x.borrowedBooks.length > 0 ? (
+                  x.borrowedBooks.map((x) => (
+                    <p className="p-2 px-4 text-blue-400 text-center font-semibold rounded-[40px] border-blue-400 border-2">
+                      {x.title}
+                    </p>
+                  ))
+                ) : (
+                  <p className="p-2 px-4 text-red-400 text-center font-semibold rounded-[40px] border-red-400 border-2">Brak wypożyczonych książek</p>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

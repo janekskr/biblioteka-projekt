@@ -2,6 +2,8 @@
 import { useForm } from "react-hook-form";
 
 import { Library, Reader, libraryInstance } from "@/lib/api";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 
 type Credentials = {
   firstName: string;
@@ -14,21 +16,28 @@ export default function AddUserPage() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm<Credentials>();
+
+  const router = useRouter()
 
   const onSubmit = async ({ firstName, lastName, age }: Credentials) => {
     try {
-      const reader = new Reader(firstName, lastName, +age); // Create a new Reader instance
-      libraryInstance.addReader(reader); // Add the reader to the library
-      console.log("Reader created:", libraryInstance.books);
+      const reader = new Reader(firstName, lastName, +age)
+      libraryInstance.addReader(reader)
+      toast.success("Pomyślnie dodano czytelnika 🤓📖")
+      router.push("/profile");
     } catch (error) {
       console.error("Login failed:", error);
+    } finally {
+      reset()
     }
   };
 
   return (
-    <main className="mt-[100px] text-black px-24">
-      <h2 className="text-2xl font-bold mb-4">Dodaj nowego użytkownika</h2>
+    <div className="w-[70%] mt-[84px]">
+      <Toaster position="top-center" reverseOrder={false} />
+      <h1 className="text-3xl font-bold mb-4">Dodaj nowego użytkownika</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
           <label htmlFor="firstName" className="block">Imię:</label>
@@ -50,6 +59,6 @@ export default function AddUserPage() {
 
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Book</button>
       </form>
-    </main>
+    </div>
   );
 }

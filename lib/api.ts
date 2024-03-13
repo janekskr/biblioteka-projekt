@@ -3,23 +3,28 @@ export class Book {
 
   title: string;
   author: string;
-  year: number;
-  count: number;
+  year: string;
   available: boolean;
   id: number;
+  publisher: string;
 
-  constructor(title: string, author: string, year: number, count: number) {
+  constructor(
+    title: string,
+    author: string,
+    year: string,
+    publisher: string,
+  ) {
     this.title = title;
+    this.publisher = publisher;
     this.author = author;
     this.year = year;
-    this.count = count = 1;
-    this.available = count > 0;
+    this.available = true;
     this.id = ++Book.lastId;
   }
 
   displayInfo(): void {
     console.log(
-      `Title: ${this.title}, Author: ${this.author}, Year: ${this.year}, Available Copies: ${this.count}`
+      `Tytuł: ${this.title}, Autor: ${this.author}, Rok wydania: ${this.year}`
     );
   }
 }
@@ -43,12 +48,9 @@ export class Reader {
 
   borrowBook(book: Book): void {
     if (book.available) {
-      book.count--; // Reduce available copies count
-      if (book.count === 0) {
-        book.available = false; // Set book as unavailable if no copies left
-      }
+      book.available = false;
+
       this.borrowedBooks.push(book);
-      // console.log(`${this.firstName} ${this.lastName} borrowed "${book.title}"`);
     } else {
       console.log(`${book.title} jest nie dostępna.`);
     }
@@ -81,8 +83,8 @@ export class Library {
   }
 
   loanBook(readerId: number, book: Book): void {
-    const reader = this.findUserById(readerId)
-    if(!reader) return
+    const reader = this.findUserById(readerId);
+    if (!reader) return;
 
     if (!reader.borrowedBooks.includes(book)) {
       reader.borrowBook(book);
@@ -94,7 +96,7 @@ export class Library {
   }
 
   hasBorrowedBook(readerId: number, bookId: number): boolean {
-    const reader = this.findUserById(readerId)
+    const reader = this.findUserById(readerId);
     if (reader) {
       return reader.borrowedBooks.some((book) => book.id === bookId);
     }
@@ -102,13 +104,13 @@ export class Library {
   }
 
   findUserById(id: number): Reader | undefined {
-    return this.readers.find(reader => reader.id === id);
+    return this.readers.find((reader) => reader.id === id);
   }
 }
 
-const book1 = new Book("Harry Potter", "J.K. Rowling", 1997, 3);
-const book2 = new Book("Lord of the Rings", "J.R.R. Tolkien", 1954, 2);
-const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 1960, 1);
+const book1 = new Book("Harry Potter", "J.K. Rowling", "1997", "Polska");
+const book2 = new Book("Lord of the Rings", "J.R.R. Tolkien", "996", "WP");
+const book3 = new Book("To Kill a Mockingbird", "Harper Lee", "1960", "Onet");
 
 const reader1 = new Reader("John", "Doe", 25);
 const reader2 = new Reader("Jane", "Smith", 30);
@@ -120,7 +122,3 @@ libraryInstance.addBook(book2);
 libraryInstance.addBook(book3);
 libraryInstance.addReader(reader1);
 libraryInstance.addReader(reader2);
-
-libraryInstance.loanBook(reader1.id, book1)
-libraryInstance.loanBook(reader1.id, book2)
-libraryInstance.loanBook(reader2.id, book3)
