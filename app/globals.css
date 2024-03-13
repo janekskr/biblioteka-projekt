@@ -23,6 +23,15 @@ body {
 
 .book-container > * {
   height: 103px;
-  background: black;
+  background: white;
   max-width: 130px;
+}
+
+.test{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  border: black, solid;
+  border-width: 2px;
 }

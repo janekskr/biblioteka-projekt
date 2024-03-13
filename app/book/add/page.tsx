@@ -44,7 +44,7 @@ const AddBook: React.FC = () => {
           <label htmlFor="tag" className="block">Rodzaj:</label>
           <select id="tag"  {...register('tag', { required: true })} className="border border-gray-300 rounded px-3 py-2 w-full" >
             <option value="Akcja">Akcja</option>
-            <option value="Horro">Horror</option>
+            <option value="Horror">Horror</option>
             <option value="Kryminał">Kryminał</option>
             <option value="Fantasy">Fantasy</option>
             <option value="Biografia">Biografia</option>
