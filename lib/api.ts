@@ -7,14 +7,16 @@ export class Book {
   count: number;
   available: boolean;
   id: number;
+  tag: string;
 
-  constructor(title: string, author: string, year: number, count: number) {
+  constructor(title: string, author: string, year: number, count: number, tag: string) {
     this.title = title;
     this.author = author;
     this.year = year;
     this.count = count = 1;
     this.available = count > 0;
     this.id = ++Book.lastId;
+    this.tag = tag
   }
 
   displayInfo(): void {
@@ -106,9 +108,9 @@ export class Library {
   }
 }
 
-const book1 = new Book("Harry Potter", "J.K. Rowling", 1997, 3);
-const book2 = new Book("Lord of the Rings", "J.R.R. Tolkien", 1954, 2);
-const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 1960, 1);
+const book1 = new Book("Harry Potter", "J.K. Rowling", 1997, 3, "Fantasy");
+const book2 = new Book("Lord of the Rings", "J.R.R. Tolkien", 1954, 2, "Fantasy");
+const book3 = new Book("To Kill a Mockingbird", "Harper Lee", 1960, 1, "Fantasy");
 
 const reader1 = new Reader("John", "Doe", 25);
 const reader2 = new Reader("Jane", "Smith", 30);

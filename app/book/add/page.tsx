@@ -8,14 +8,15 @@ interface BookFormData {
   author: string;
   year: number;
   count: number;
+  tag: string
 }
 
 const AddBook: React.FC = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<BookFormData>();
 
   const onSubmit = (data: BookFormData) => {
-    const { title, author, year, count } = data;
-    const newBook = new Book(title, author, year, count);
+    const { title, author, year, count, tag} = data;
+    const newBook = new Book(title, author, year, count, tag);
     libraryInstance.addBook(newBook);
     console.log(libraryInstance.books)
   };
@@ -38,6 +39,19 @@ const AddBook: React.FC = () => {
           <label htmlFor="year" className="block">Rok:</label>
           <input id="year" type="number" {...register('year', { required: true })} className="border border-gray-300 rounded px-3 py-2 w-full" />
           {errors.year && <p className='text-red-500'>This field is required.</p>}
+        </div>
+        <div>
+          <label htmlFor="tag" className="block">Rodzaj:</label>
+          <select id="tag"  {...register('tag', { required: true })} className="border border-gray-300 rounded px-3 py-2 w-full" >
+            <option value="Akcja">Akcja</option>
+            <option value="Horro">Horror</option>
+            <option value="Kryminał">Kryminał</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Biografia">Biografia</option>
+            <option value="Naukowe">Naukowe</option>
+            <option value="Inne">Inne</option>
+          </select>
+          {errors.tag && <p className='text-red-500'>This field is required.</p>}
         </div>
         {/* <div>
           <label htmlFor="count" className="block">Count:</label>

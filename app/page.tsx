@@ -5,15 +5,16 @@ import Link from "next/link";
 
 export default function HomeScreen() {
   console.log();
+  // bg-[url('/ksiegarnia.jpg')] bg-contain bg-no-repeat bg-center
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-[url('/ksiegarnia.jpg')] bg-contain bg-no-repeat bg-center">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="book-container">
         {libraryInstance.books
           .filter((x) => x.available)
           .map((book) => (
             <Link
               href={"book/" + book.id}
-              className="flex items-center justify-between flex-col text-white p-2"
+              className="flex items-center justify-between flex-col text-white p-2 max-w-[75px]"
               key={book.id}
             >
               <p className="font-bold text-center">{book.title}</p>
