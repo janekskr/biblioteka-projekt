@@ -26,11 +26,11 @@ export default function BookDetail({ params }: { params: { id: string } }) {
 
   return (
     <main className="mt-[100px] text-black px-24">
-      <p>Tytuł: {element.title}</p>
-      <p>Autor: {element.author}</p>
-      <p>Rok: {element.year}</p>
-      <p>Dostępny: {element.available ? "Tak" : "Nie"}</p>
-      <label htmlFor="select">Wybierz czytelnika:</label>
+      <p>Tytuł: <span className="font-bold">{element.title}</span></p>
+      <p>Autor:  <span className="font-bold">{element.author}</span></p>
+      <p>Rok: <span className="font-bold">{element.year}</span></p>
+      <p>Dostępny: {element.available ? (<span className="font-bold text-green-700">Tak</span>) : <span className="font-bold text-red-700">Nie</span>}</p>
+      <label htmlFor="select">Kto będzie dziś czytał? </label>
       <select id="select" onChange={handleSelectChange}>
         <option value="">-</option>
         {libraryInstance.readers.map((reader) => (

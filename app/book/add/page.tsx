@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 interface BookFormData {
   title: string;
   author: string;
-  year: number;
+  year: string;
   count: number;
-  tag: string
+  tag: string,
+  publisher: string
 }
 
 const AddBook: React.FC = () => {
@@ -25,8 +26,8 @@ const AddBook: React.FC = () => {
 
   const onSubmit = (data: BookFormData) => {
     try {
-      const { title, author, year, count } = data;
-      const newBook = new Book(title, author, year, count);
+      const { title, author, year, count, tag, publisher } = data;
+      const newBook = new Book(title, author, year, count, publisher, tag);
       libraryInstance.addBook(newBook);
       toast.success("Pomyślnie dodano książkę 🚀🚀🚀");
       router.push("/");
