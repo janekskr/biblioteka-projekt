@@ -1,11 +1,13 @@
-"use client";
+"use client"
 
 import { libraryInstance } from "@/lib/api";
 // import { generateRandomColor } from "@/lib/utils";
 import Link from "next/link";
+import _ from 'lodash';
 
 export default function HomeScreen() {
-  console.log();
+  const grouped = _.groupBy(libraryInstance.books, 'tag');
+
   return (
       <div className="h-[70%] flex gap-[30px] border-b-[50px] rounded-xl justify-center border-b-orange-950 w-[80%]">
         {libraryInstance.books

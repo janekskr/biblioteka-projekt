@@ -10,6 +10,7 @@ interface BookFormData {
   author: string;
   year: number;
   count: number;
+  tag: string
 }
 
 const AddBook: React.FC = () => {
@@ -83,12 +84,25 @@ const AddBook: React.FC = () => {
             <p className="text-red-500">Pole jest wymagane.</p>
           )}
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
-          Add Book
-        </button>
+        <div>
+          <label htmlFor="tag" className="block">Rodzaj:</label>
+          <select id="tag"  {...register('tag', { required: true })} className="border border-gray-300 rounded px-3 py-2 w-full" >
+            <option value="Akcja">Akcja</option>
+            <option value="Horror">Horror</option>
+            <option value="Kryminał">Kryminał</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Biografia">Biografia</option>
+            <option value="Naukowe">Naukowe</option>
+            <option value="Inne">Inne</option>
+          </select>
+          {errors.tag && <p className='text-red-500'>This field is required.</p>}
+        </div>
+        {/* <div>
+          <label htmlFor="count" className="block">Count:</label>
+          <input id="count" type="number" {...register('count', { required: true })} className="border border-gray-300 rounded px-3 py-2 w-full" />
+          {errors.count && <p className='text-red-500'>This field is required.</p>}
+        </div> */}
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Book</button>
       </form>
     </div>
   );

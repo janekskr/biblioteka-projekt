@@ -6,3 +6,32 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
+.book-container {
+  width: 1013px;
+  overflow: hidden;
+  top: 369px;
+  max-height: 503px;
+  position: absolute;
+  left: 453px;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 31px;
+}
+
+.book-container > * {
+  height: 103px;
+  background: white;
+  max-width: 130px;
+}
+
+.test{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  border: black, solid;
+  border-width: 2px;
+}
